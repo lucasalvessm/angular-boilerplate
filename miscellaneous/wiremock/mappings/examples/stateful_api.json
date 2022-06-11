@@ -1,0 +1,76 @@
+{
+  "mappings": [
+    {
+      "scenarioName": "StatefulAPI",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "stateful2",
+      "request": {
+        "method": "GET",
+        "url": "/stateful"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "state": "1"
+        }
+      }
+    },
+    {
+      "scenarioName": "StatefulAPI",
+      "requiredScenarioState": "stateful2",
+      "newScenarioState": "stateful3",
+      "request": {
+        "method": "GET",
+        "url": "/stateful"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "state": "2"
+        }
+      }
+    },
+    {
+      "scenarioName": "StatefulAPI",
+      "requiredScenarioState": "stateful3",
+      "newScenarioState": "stateful4",
+      "request": {
+        "method": "GET",
+        "url": "/stateful"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "state": "3"
+        }
+      }
+    },
+    {
+      "scenarioName": "StatefulAPI",
+      "requiredScenarioState": "stateful4",
+      "newScenarioState": "Started",
+      "request": {
+        "method": "GET",
+        "url": "/stateful"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "state": "Stateful Example"
+        }
+      }
+    }
+  ]
+}

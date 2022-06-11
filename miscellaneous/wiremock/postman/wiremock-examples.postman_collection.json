@@ -1,0 +1,167 @@
+{
+  "info": {
+    "_postman_id": "4b242422-8736-4eb6-862c-824329d404c9",
+    "name": "Wiremock Examples",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "570482"
+  },
+  "item": [
+    {
+      "name": "simple example",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{URL}}/simple-example",
+          "host": ["{{URL}}"],
+          "path": ["simple-example"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "request mapping example",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "jeffteenjefftyjeff",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "jeff@example.com",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "image/*",
+            "type": "text"
+          },
+          {
+            "key": "cookie",
+            "value": "session=standard12345bank",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/request-mapping-example?search_term=WireMock",
+          "host": ["{{URL}}"],
+          "path": ["request-mapping-example"],
+          "query": [
+            {
+              "key": "search_term",
+              "value": "WireMock"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "error example",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/error-example",
+          "host": ["{{URL}}"],
+          "path": ["error-example"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "set global delay",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fixedDelay\": 500\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/__admin/settings",
+          "host": ["{{URL}}"],
+          "path": ["__admin", "settings"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "stateful example",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/stateful",
+          "host": ["{{URL}}"],
+          "path": ["stateful"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "multiple mappings example",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/multiple-mappings",
+          "host": ["{{URL}}"],
+          "path": ["multiple-mappings"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "URL",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

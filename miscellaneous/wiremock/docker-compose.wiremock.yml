@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  wiremock:
+    ports:
+      - '8080:8080'
+    command: --enable-browser-proxying --trust-proxy-target localhost
+    container_name: wiremock
+    volumes:
+      - './:/home/wiremock'
+    image: 'wiremock/wiremock:2.33.2'

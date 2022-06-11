@@ -1,0 +1,64 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/multiple-mappings"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "Method": "GET"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/multiple-mappings"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "Method": "POST"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "DELETE",
+        "url": "/multiple-mappings"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "Method": "DELETE"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "PUT",
+        "url": "/multiple-mappings"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "Method": "PUT"
+        }
+      }
+    }
+  ]
+}

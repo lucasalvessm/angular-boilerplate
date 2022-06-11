@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "DELETE",
+    "url": "/error-example"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "error": "Internal Server Error",
+      "message": "An internal server error occurred"
+    },
+    "fixedDelayMilliseconds": 500
+  }
+}

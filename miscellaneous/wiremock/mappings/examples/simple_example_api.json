@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/simple-example"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Set-Cookie": ["session_id=91837492837; split_test_group=B"],
+      "Cache-Control": "no-cache"
+    },
+    "bodyFileName": "../__files/simple_example_response.json"
+  }
+}

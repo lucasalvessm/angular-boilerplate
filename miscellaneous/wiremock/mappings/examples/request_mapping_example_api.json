@@ -1,0 +1,33 @@
+{
+  "request": {
+    "urlPath": "/request-mapping-example",
+    "method": "ANY",
+    "headers": {
+      "Accept": {
+        "contains": "image"
+      }
+    },
+    "queryParameters": {
+      "search_term": {
+        "equalTo": "WireMock"
+      }
+    },
+    "cookies": {
+      "session": {
+        "matches": ".*12345.*"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": "{}"
+      }
+    ],
+    "basicAuthCredentials": {
+      "username": "jeff@example.com",
+      "password": "jeffteenjefftyjeff"
+    }
+  },
+  "response": {
+    "status": 200
+  }
+}
