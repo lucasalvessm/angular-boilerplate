@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="card login-container">
+  <h4>Faça seu Login</h4>
+  <form [formGroup]="form" (submit)="onSubmit()" class="login-container__form" novalidate>
+    <div class="login-container__input">
+      <label for="username" class="form-label">Usuário</label>
+      <input type="text" formControlName="username" class="form-control" id="username" placeholder="carlosbarreto123" />
+      <div *ngIf="isFormFieldInvalid(form, 'username')" class="invalid-feedback">O campo deve ser preenchido.</div>
+    </div>
+
+    <div class="login-container__input">
+      <label for="password" class="form-label">Senha</label>
+      <input type="password" formControlName="password" class="form-control" id="password" placeholder="********" />
+      <div *ngIf="isFormFieldInvalid(form, 'password')" class="invalid-feedback">
+        A senha deve ter no mínimo 3 caracteres.
+      </div>
+    </div>
+
+    <button [disabled]="isFormDisabled" class="btn btn-dark login-container__button" type="submit">Login</button>
+  </form>
+  <ngb-alert class="login-container__alert" *ngIf="loginErrorMessage" type="danger" (closed)="close()">{{
+    loginErrorMessage
+  }}</ngb-alert>
+</div>
