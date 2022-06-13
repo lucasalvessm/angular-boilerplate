@@ -1,0 +1,14 @@
+{
+  "request": {
+    "urlPath": "/login",
+    "method": "POST"
+  },
+  "response": {
+    "status": 401,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": "{\"message\":\"Usuário ou senha inválido.\"}",
+    "fixedDelayMilliseconds": 1000
+  }
+}

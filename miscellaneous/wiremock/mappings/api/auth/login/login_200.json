@@ -1,0 +1,20 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPath": "/login",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\"username\":\"carlos\",\"password\":\"123\"}"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": { "idToken": "12345", "expiresIn": 300 },
+    "fixedDelayMilliseconds": 500
+  }
+}

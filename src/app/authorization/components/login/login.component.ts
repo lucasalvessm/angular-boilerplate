@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { finalize, take } from 'rxjs/operators';
 import { isFieldInvalid } from 'src/app/shared/utils/form-utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ export class LoginComponent implements OnInit {
   loginErrorMessage: string | undefined;
   form: FormGroup;
   disableButton = false;
+  canShowComponent = false;
   isFormFieldInvalid = isFieldInvalid;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(3)]],
@@ -26,9 +28,17 @@ export class LoginComponent implements OnInit {
     return this.form.invalid || this.disableButton;
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    this.canShowComponent = true;
+  }
 
   public onSubmit(): void {
+    this.loginErrorMessage = undefined;
     this.disableButton = true;
     this.authService
       .login(this.form.value)
@@ -37,8 +47,9 @@ export class LoginComponent implements OnInit {
         finalize(() => (this.disableButton = false)),
       )
       .subscribe(
-        (data) => {
-          console.log(data);
+        () => {
+          console.log('as');
+          this.router.navigate(['/']);
         },
         (error) => {
           this.handleError(error);

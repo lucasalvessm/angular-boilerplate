@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "prettier": "prettier --write \"src/**/*.{ts, html, scss}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "wiremock": "docker-compose -f ./miscellaneous/wiremock/docker-compose.wiremock.yml up"
   },
   "private": true,
   "dependencies": {
