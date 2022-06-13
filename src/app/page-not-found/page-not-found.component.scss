@@ -1,0 +1,23 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10vh;
+  padding: 0 10px;
+
+  .page-not-found__title {
+    font-size: 5rem;
+  }
+
+  .page-not-found__img {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  .page-not-found__button {
+    margin-top: 30px;
+  }
+}
