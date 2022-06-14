@@ -6,11 +6,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/modules/shared.module';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, SharedModule],
+  declarations: [AppComponent, PageNotFoundComponent, MenuComponent, HomeComponent],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, SharedModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
