@@ -1,0 +1,14 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPath": "/users/1",
+    "method": "DELETE"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "fixedDelayMilliseconds": 1000
+  }
+}

@@ -1,0 +1,38 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Username</th>
+      <th scope="col">Staff</th>
+      <th scope="col">Super</th>
+      <th scope="col">Ativo</th>
+      <th scope="col">Excluir</th>
+      <th scope="col">Detalhes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.firstName + ' ' + user.lastName }}</td>
+      <td>{{ user.username }}</td>
+      <td><ng-container [ngTemplateOutlet]="user.isStaff ? checked : unchecked"></ng-container></td>
+      <td><ng-container [ngTemplateOutlet]="user.isSuperuser ? checked : unchecked"></ng-container></td>
+      <td><ng-container [ngTemplateOutlet]="user.isActive ? checked : unchecked"></ng-container></td>
+      <td>
+        <button (click)="onDelete(user)" type="button" class="btn btn-outline-danger">
+          <i class="bi bi-trash2"></i>
+        </button>
+      </td>
+
+      <td>
+        <button type="button" class="btn btn-outline-dark"><i class="bi bi-grid"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #unchecked>
+  <i class="bi bi-square"></i>
+</ng-template>
+<ng-template #checked>
+  <i class="bi bi-check-square"></i>
+</ng-template>

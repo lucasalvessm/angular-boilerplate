@@ -10,9 +10,10 @@ import { MenuComponent } from './components/menu/menu.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, MenuComponent, HomeComponent],
+  declarations: [AppComponent, PageNotFoundComponent, MenuComponent, HomeComponent, ConfirmModalComponent],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, SharedModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
