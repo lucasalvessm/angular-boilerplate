@@ -1,2 +1,12 @@
-<app-menu *ngIf="authService.isLoggedIn()"></app-menu>
-<router-outlet></router-outlet>
+<ng-container [ngTemplateOutlet]="authService.isLoggedIn() ? containerWithMenu : containerWithMenu"></ng-container>
+
+<ng-template #containerWithMenu>
+  <app-menu *ngIf="authService.isLoggedIn()"></app-menu>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>
+
+<ng-template #containerWithoutMenu>
+  <router-outlet></router-outlet>
+</ng-template>

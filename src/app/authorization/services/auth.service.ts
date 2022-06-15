@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -11,13 +12,14 @@ import { LoginRequest } from '../authorization.model';
 export class AuthService {
   private api = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(request: LoginRequest): Observable<any> {
     return this.http.post(`${this.api}/login`, request).pipe(tap(this.setSession));
   }
 
   public logout() {
+    this.router.navigate(['/login']);
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
   }
