@@ -1,0 +1,55 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPath": "/users",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "id": 1,
+        "password": "123",
+        "lastLogin": "Ontem",
+        "isSuperuser": true,
+        "username": "lucasalvessm",
+        "firstName": "Lucas",
+        "lastName": "Alves",
+        "email": "lucas@gmail.com",
+        "isStaff": false,
+        "isActive": true,
+        "dateJoined": "Anteontem"
+      },
+      {
+        "id": 2,
+        "password": "321",
+        "lastLogin": "Anteontem",
+        "isSuperuser": false,
+        "username": "marcelo",
+        "firstName": "Marcelo",
+        "lastName": "Alencar",
+        "email": "marcelo@gmail.com",
+        "isStaff": true,
+        "isActive": true,
+        "dateJoined": "Quarta"
+      },
+      {
+        "id": 3,
+        "password": "dasd123@!$#$@cZSF",
+        "lastLogin": "12/12/2012",
+        "isSuperuser": true,
+        "username": "cr7",
+        "firstName": "Cristiano",
+        "lastName": "Ronaldo",
+        "email": "cristiano@cr7.com",
+        "isStaff": true,
+        "isActive": true,
+        "dateJoined": "11/12/2012"
+      }
+    ],
+    "fixedDelayMilliseconds": 2000
+  }
+}

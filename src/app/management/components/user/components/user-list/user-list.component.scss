@@ -1,0 +1,26 @@
+.user-list {
+  display: flex;
+  justify-content: center;
+
+  .user-list__spinner,
+  .user-list__error {
+    margin-top: 15vh;
+  }
+  .user-list__table {
+    width: 100%;
+  }
+
+  .user-list__spinner {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .user-list__error {
+    width: 800px;
+    text-align: center;
+
+    button {
+      margin-top: 10px;
+    }
+  }
+}

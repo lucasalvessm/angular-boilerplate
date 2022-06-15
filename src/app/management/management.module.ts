@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileComponent } from './components/profile/profile.component';
 import { ManagementRoutingModule } from './management-routing.module';
-import { UserListComponent } from './components/user/user-list/user-list.component';
-import { UserDetailsComponent } from './components/user/user-details/user-details.component';
-import { UserTableComponent } from './components/user/user-table/user-table.component';
+import { UserDetailsComponent } from './components/user/components/user-details/user-details.component';
+import { UserTableComponent } from './components/user/components/user-table/user-table.component';
+import { UserListComponent } from './components/user/components/user-list/user-list.component';
+import { SharedModule } from '../shared/modules/shared.module';
 
 @NgModule({
   declarations: [ProfileComponent, UserListComponent, UserDetailsComponent, UserTableComponent],
-  imports: [CommonModule, ManagementRoutingModule],
+  imports: [CommonModule, ManagementRoutingModule, SharedModule],
 })
 export class ManagementModule {}
