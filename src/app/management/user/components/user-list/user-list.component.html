@@ -1,10 +1,15 @@
+<div class="add-button">
+  <button (click)="createNewUser()" class="btn btn-dark" type="submit">Novo Usuário</button>
+</div>
+
 <p *ngFor="let alert of alerts">
   <ngb-alert [type]="alert.type" (closed)="closeMessage(alert)">{{ alert.message }}</ngb-alert>
 </p>
 
 <div class="user-list">
   <div *ngIf="!!users?.length && !errorMessage" class="user-list__table">
-    <app-user-table [users]="users" (userDeleted)="onUserDeleted($event)"> </app-user-table>
+    <app-user-table [users]="users" (userDeleted)="onUserDeleted($event)" (userEdited)="editUser($event)">
+    </app-user-table>
   </div>
 
   <div *ngIf="!users?.length && !errorMessage" class="user-list__spinner text-center spinner-border" role="status">

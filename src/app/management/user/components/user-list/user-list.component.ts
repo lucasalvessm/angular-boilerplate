@@ -27,9 +27,12 @@ export class UserListComponent implements OnInit {
     this.getUsers();
   }
 
-  public tryAgain(): void {
-    this.errorMessage = undefined;
-    this.getUsers();
+  public createNewUser(): void {
+    console.log('create new user');
+  }
+
+  public editUser(user: User): void {
+    console.log('edit user');
   }
 
   public onUserDeleted(user: User): void {
@@ -55,6 +58,11 @@ export class UserListComponent implements OnInit {
           });
         },
       );
+  }
+
+  public tryAgain(): void {
+    this.errorMessage = undefined;
+    this.getUsers();
   }
 
   public closeMessage(message: Message): void {

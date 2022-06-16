@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from '../../user.model';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/components/confirm-modal/confirm-modal.component';
+import { User } from '../../user.model';
 
 @Component({
   selector: 'app-user-table',
@@ -11,14 +11,13 @@ import { ConfirmModalComponent } from 'src/app/components/confirm-modal/confirm-
 export class UserTableComponent implements OnInit {
   @Input() users: User[] | undefined;
   @Output() userDeleted = new EventEmitter<User>();
+  @Output() userEdited = new EventEmitter<User>();
 
   constructor(private modalService: NgbModal) {}
 
-  ngOnInit(): void {
-    console.log(this.users);
-  }
+  ngOnInit(): void {}
 
-  onDelete(user: User) {
+  onDelete(user: User): void {
     const modalRef = this.modalService.open(ConfirmModalComponent);
     modalRef.componentInstance.title = 'Excluir Usuário';
     modalRef.componentInstance.subtitle = `Deseja excluir o usuário ${user.firstName} ${user.lastName}?`;
@@ -28,5 +27,9 @@ export class UserTableComponent implements OnInit {
         this.userDeleted.emit(user);
       }
     });
+  }
+
+  onEdit(user: User): void {
+    this.userEdited.emit(user);
   }
 }
