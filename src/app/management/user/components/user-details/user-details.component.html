@@ -1,5 +1,85 @@
 <div class="details-actions">
   <button (click)="goBack()" class="btn btn-dark" type="submit">Voltar</button>
+  <h2>{{ title }}</h2>
 </div>
 
 <app-alert></app-alert>
+
+<div *ngIf="isLoading" class="spinner-box">
+  <div class="user-list__spinner text-center spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<form [formGroup]="form" (submit)="onSubmit()" class="user-details__form">
+  <div *ngIf="user?.id" class="user-details__input">
+    <label class="form-label">Id do usuário</label>
+    <p>#{{ user?.id }}</p>
+  </div>
+  <div class="user-details__input">
+    <label for="firstName" class="form-label">Primeiro nome</label>
+    <input type="text" formControlName="firstName" class="form-control" id="firstName" placeholder="Carlos" />
+    <div *ngIf="isFormFieldInvalid(form, 'firstName')" class="invalid-feedback">
+      {{ applicationMessages.requiredField }}
+    </div>
+  </div>
+  <div class="user-details__input">
+    <label for="lastName" class="form-label">Último nome</label>
+    <input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Barreto" />
+    <div *ngIf="isFormFieldInvalid(form, 'lastName')" class="invalid-feedback">
+      {{ applicationMessages.requiredField }}
+    </div>
+  </div>
+  <div class="user-details__input">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" formControlName="email" class="form-control" id="email" placeholder="email@gmail.com" />
+    <div *ngIf="isFormFieldInvalid(form, 'email')" class="invalid-feedback">
+      {{ applicationMessages.requiredField }}
+    </div>
+  </div>
+  <div class="user-details__input">
+    <label for="username" class="form-label">Usuário</label>
+    <input type="text" formControlName="username" class="form-control" id="username" placeholder="carlinhos123" />
+    <div *ngIf="isFormFieldInvalid(form, 'username')" class="invalid-feedback">
+      {{ applicationMessages.requiredField }}
+    </div>
+  </div>
+
+  <div class="user-details__input">
+    <label for="password" class="form-label">Senha</label>
+    <input type="password" formControlName="password" class="form-control" id="password" placeholder="********" />
+    <div *ngIf="isFormFieldInvalid(form, 'password')" class="invalid-feedback">
+      {{ applicationMessages.passwordValidation }}
+    </div>
+  </div>
+
+  <div *ngIf="user?.lastLogin" class="user-details__input">
+    <label class="form-label">Último login</label>
+    <p>{{ user?.lastLogin }}</p>
+  </div>
+  <div *ngIf="user?.dateJoined" class="user-details__input">
+    <label class="form-label">Data de registro</label>
+    <p>{{ user?.dateJoined }}</p>
+  </div>
+
+  <div class="checkbox_container">
+    <div class="form-group form-check user-details__input">
+      <input type="checkbox" formControlName="isSuperuser" class="form-check-input" id="superUser" />
+      <label class="form-check-label" for="superUser">Super Usuário</label>
+    </div>
+
+    <div class="form-group form-check user-details__input">
+      <input type="checkbox" formControlName="isStaff" class="form-check-input" id="isStaff" />
+      <label class="form-check-label" for="isStaff">Staff</label>
+    </div>
+
+    <div class="form-group form-check user-details__input">
+      <input type="checkbox" formControlName="isActive" class="form-check-input" id="isActive" />
+      <label class="form-check-label" for="isActive">Ativo</label>
+    </div>
+  </div>
+
+  <div class="user-details__button">
+    <button [disabled]="form.invalid" class="btn btn-dark" type="submit">Salvar</button>
+  </div>
+</form>

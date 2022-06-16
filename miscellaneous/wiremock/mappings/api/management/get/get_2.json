@@ -1,0 +1,27 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPath": "/users/2",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 2,
+      "password": "321",
+      "lastLogin": "Anteontem",
+      "isSuperuser": false,
+      "username": "marcelo",
+      "firstName": "Marcelo",
+      "lastName": "Alencar",
+      "email": "marcelo@gmail.com",
+      "isStaff": true,
+      "isActive": true,
+      "dateJoined": "Quarta"
+    },
+    "fixedDelayMilliseconds": 800
+  }
+}

@@ -12,14 +12,16 @@
           class="form-control"
           id="username"
           placeholder="carlosbarreto123" />
-        <div *ngIf="isFormFieldInvalid(form, 'username')" class="invalid-feedback">O campo deve ser preenchido.</div>
+        <div *ngIf="isFormFieldInvalid(form, 'username')" class="invalid-feedback">
+          {{ applicationMessages.requiredField }}
+        </div>
       </div>
 
       <div class="login-container__input">
         <label for="password" class="form-label">Senha</label>
         <input type="password" formControlName="password" class="form-control" id="password" placeholder="********" />
         <div *ngIf="isFormFieldInvalid(form, 'password')" class="invalid-feedback">
-          A senha deve ter no mínimo 3 caracteres.
+          {{ applicationMessages.passwordValidation }}
         </div>
       </div>
 

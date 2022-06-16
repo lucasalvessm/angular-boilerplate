@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { finalize, take } from 'rxjs/operators';
 import { isFieldInvalid } from 'src/app/shared/utils/form-utils';
 import { Router } from '@angular/router';
+import { messages } from 'src/app/shared/messages';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginErrorMessage: string | undefined;
-  form: FormGroup;
-  disableButton = false;
-  canShowComponent = false;
-  isFormFieldInvalid = isFieldInvalid;
+  public loginErrorMessage: string | undefined;
+  public form: FormGroup;
+  public disableButton = false;
+  public canShowComponent = false;
+  public isFormFieldInvalid = isFieldInvalid;
+  public applicationMessages = messages;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = this.fb.group({
