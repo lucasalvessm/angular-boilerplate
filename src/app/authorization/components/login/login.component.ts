@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         () => {
-          console.log('as');
           this.router.navigate(['/']);
         },
         (error) => {

@@ -10,8 +10,6 @@ export class AuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canLoad(): boolean {
-    console.log('asdasd');
-    console.log(this.authService.isLoggedIn());
     if (this.authService.isLoggedIn()) {
       return true;
     }
