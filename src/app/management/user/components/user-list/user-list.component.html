@@ -2,9 +2,7 @@
   <button (click)="createNewUser()" class="btn btn-dark" type="submit">Novo Usuário</button>
 </div>
 
-<p *ngFor="let alert of alerts">
-  <ngb-alert [type]="alert.type" (closed)="closeMessage(alert)">{{ alert.message }}</ngb-alert>
-</p>
+<app-alert></app-alert>
 
 <div class="user-list">
   <div *ngIf="!!users?.length && !errorMessage" class="user-list__table">

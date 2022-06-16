@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs/operators';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { messages } from 'src/app/shared/messages';
 import { UserService } from '../../service/user.service';
 import { User } from '../../user.model';
-
-export interface Message {
-  type: string;
-  message: string;
-}
 
 @Component({
   selector: 'app-user-list',
@@ -15,24 +12,24 @@ export interface Message {
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
+  @ViewChild(AlertComponent) alertComponent: AlertComponent | undefined;
+
   users: User[] = [];
   errorMessage: string | undefined;
   spinner = false;
 
-  alerts: Message[] = [];
-
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getUsers();
   }
 
   public createNewUser(): void {
-    console.log('create new user');
+    this.router.navigate(['/management/users/new']);
   }
 
   public editUser(user: User): void {
-    console.log('edit user');
+    this.router.navigate([`/management/users/${user.id}/edit`]);
   }
 
   public onUserDeleted(user: User): void {
@@ -46,13 +43,13 @@ export class UserListComponent implements OnInit {
       .subscribe(
         () => {
           this.removeUser(user);
-          this.setAlertMessage({
+          this.alertComponent?.setAlertMessage({
             type: 'success',
             message: messages.userDeletedSuccessfully,
           });
         },
         () => {
-          this.setAlertMessage({
+          this.alertComponent?.setAlertMessage({
             type: 'danger',
             message: messages.errorOnDelete,
           });
@@ -63,22 +60,6 @@ export class UserListComponent implements OnInit {
   public tryAgain(): void {
     this.errorMessage = undefined;
     this.getUsers();
-  }
-
-  public closeMessage(message: Message): void {
-    const index = this.alerts.indexOf(message);
-    this.alerts.splice(index, 1);
-  }
-
-  private setAlertMessage(message: Message, timeout = 4000): void {
-    this.alerts.push(message);
-
-    setTimeout(() => {
-      const index = this.alerts.indexOf(message);
-      if (index > -1) {
-        this.alerts.splice(index, 1);
-      }
-    }, timeout);
   }
 
   private removeUser(user: User): void {
