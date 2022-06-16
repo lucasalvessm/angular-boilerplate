@@ -14,8 +14,12 @@ export class UserService {
     return this.http.get<Array<User>>(`${environment.apiUrl}/users`);
   }
 
-  getById(id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/users/${id}`);
+  getById(id: number): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+  }
+
+  getProfilesByUserId(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/user/${id}/profiles`);
   }
 
   create(user: User): Observable<any> {

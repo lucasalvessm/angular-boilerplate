@@ -1,11 +1,10 @@
 {
-  "priority": 1,
   "request": {
-    "urlPath": "/users/2",
+    "urlPath": "/users/3",
     "method": "DELETE"
   },
   "response": {
-    "status": 500,
+    "status": 200,
     "headers": {
       "Content-Type": "application/json"
     },

@@ -25,6 +25,13 @@
   grid-column: 1 / 3;
 }
 
+.selected_user_profile {
+  margin: 20px;
+  label {
+    margin-right: 10px;
+  }
+}
+
 .spinner-box {
   display: flex;
   justify-content: center;

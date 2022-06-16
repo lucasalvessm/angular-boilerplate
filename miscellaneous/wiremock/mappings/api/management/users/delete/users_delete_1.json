@@ -1,7 +1,6 @@
 {
-  "priority": 1,
   "request": {
-    "urlPath": "/users/3",
+    "urlPath": "/users/1",
     "method": "DELETE"
   },
   "response": {

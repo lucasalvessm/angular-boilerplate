@@ -1,5 +1,4 @@
 {
-  "priority": 1,
   "request": {
     "urlPath": "/users/1",
     "method": "GET"
@@ -12,7 +11,7 @@
     "jsonBody": {
       "id": 1,
       "password": "123",
-      "lastLogin": "Ontem",
+      "lastLogin": "2022-06-16T18:17:17.921Z",
       "isSuperuser": true,
       "username": "lucasalvessm",
       "firstName": "Lucas",
@@ -20,7 +19,7 @@
       "email": "lucas@gmail.com",
       "isStaff": false,
       "isActive": true,
-      "dateJoined": "Anteontem"
+      "dateJoined": "2010-06-16T18:17:17.921Z"
     },
     "fixedDelayMilliseconds": 800
   }

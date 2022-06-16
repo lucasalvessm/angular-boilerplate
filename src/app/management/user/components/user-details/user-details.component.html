@@ -47,19 +47,31 @@
 
   <div class="user-details__input">
     <label for="password" class="form-label">Senha</label>
-    <input type="password" formControlName="password" class="form-control" id="password" placeholder="********" />
+    <div class="input-group">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        class="form-control"
+        id="password"
+        placeholder="********"
+        aria-describedby="button-password" />
+      <div class="input-group-append">
+        <button (click)="showAndHide()" class="btn btn-outline-secondary" type="button" id="button-password">
+          {{ showPassword ? 'Esconder' : 'Mostrar' }}
+        </button>
+      </div>
+    </div>
     <div *ngIf="isFormFieldInvalid(form, 'password')" class="invalid-feedback">
       {{ applicationMessages.passwordValidation }}
     </div>
   </div>
-
   <div *ngIf="user?.lastLogin" class="user-details__input">
     <label class="form-label">Último login</label>
-    <p>{{ user?.lastLogin }}</p>
+    <p>{{ user?.lastLogin | date: 'dd/MM/yyyy' }}</p>
   </div>
   <div *ngIf="user?.dateJoined" class="user-details__input">
     <label class="form-label">Data de registro</label>
-    <p>{{ user?.dateJoined }}</p>
+    <p>{{ user?.dateJoined | date: 'dd/MM/yyyy' }}</p>
   </div>
 
   <div class="checkbox_container">
@@ -79,7 +91,27 @@
     </div>
   </div>
 
+  <div>
+    <h4>Perfis do Usuário</h4>
+
+    <div class="form-group">
+      <label for="profiles">Perfis disponíveis</label>
+      <select #select class="form-control" id="profiles" (change)="selectUserProfile(select.value)">
+        <option selected>Selecione...</option>
+        <option [value]="profile.id" *ngFor="let profile of availableProfiles">{{ profile.description }}</option>
+      </select>
+    </div>
+    <div>
+      <div *ngFor="let userProfile of userProfiles" class="selected_user_profile">
+        <label>{{ userProfile.description }}</label>
+        <button (click)="removeUserProfile(userProfile)" type="button" class="btn btn-outline-danger">
+          <i class="bi bi-trash2"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="user-details__button">
-    <button [disabled]="form.invalid" class="btn btn-dark" type="submit">Salvar</button>
+    <button [disabled]="isFormDisabled" class="btn btn-dark" type="submit">Salvar</button>
   </div>
 </form>
