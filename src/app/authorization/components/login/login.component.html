@@ -6,12 +6,7 @@
     <form [formGroup]="form" (submit)="onSubmit()" class="login-container__form" novalidate>
       <div class="login-container__input">
         <label for="username" class="form-label">Usuário</label>
-        <input
-          type="text"
-          formControlName="username"
-          class="form-control"
-          id="username"
-          placeholder="carlosbarreto123" />
+        <input type="text" formControlName="username" class="form-control" id="username" placeholder="usuario123" />
         <div *ngIf="isFormFieldInvalid(form, 'username')" class="invalid-feedback">
           {{ applicationMessages.requiredField }}
         </div>
