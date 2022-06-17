@@ -1,0 +1,26 @@
+{
+  "request": {
+    "urlPath": "/users",
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 1,
+      "password": "123",
+      "lastLogin": "2022-06-16T18:17:17.921Z",
+      "isSuperuser": true,
+      "username": "lucasalvessm",
+      "firstName": "Lucas",
+      "lastName": "Alves",
+      "email": "lucas@gmail.com",
+      "isStaff": false,
+      "isActive": true,
+      "dateJoined": "2010-06-16T18:17:17.921Z"
+    },
+    "fixedDelayMilliseconds": 1000
+  }
+}

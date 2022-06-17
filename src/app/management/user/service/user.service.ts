@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Profile } from '../../profile/profile.model';
 import { User } from '../user.model';
 
 @Injectable({
@@ -20,6 +21,10 @@ export class UserService {
 
   getProfilesByUserId(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/user/${id}/profiles`);
+  }
+
+  setProfilesByUserId(id: number, profiles: Profile[]): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/user/${id}/profiles`, profiles);
   }
 
   create(user: User): Observable<any> {

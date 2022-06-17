@@ -31,6 +31,7 @@ export class UserDetailsComponent implements OnInit {
   isLoading = false;
   disableButton = false;
   showPassword = false;
+  timeoutMessage = 5000;
 
   constructor(
     private router: Router,
@@ -66,31 +67,35 @@ export class UserDetailsComponent implements OnInit {
 
     this.isLoading = true;
 
+    this.getProfiles().subscribe((profiles) => {
+      this.profiles = profiles;
+      this.setAvailableProfiles();
+    });
+
     if (!id) {
       this.title = 'Novo usuário';
-      this.getProfiles()
-        .pipe(finalize(() => (this.isLoading = false)))
-        .subscribe((profiles) => {
-          this.profiles = profiles;
-          this.setAvailableProfiles();
-        });
+      this.isLoading = false;
       return;
     }
 
     this.title = 'Editar Usuário';
 
-    forkJoin([this.getProfiles(), this.getUserById(id), this.getUserProfilesById(id)])
+    forkJoin([this.getUserById(id), this.getUserProfilesById(id)])
       .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe((results) => {
-        this.profiles = results[0];
+      .subscribe(
+        (results) => {
+          this.user = results[0];
+          this.form.patchValue(results[0]);
 
-        this.user = results[1];
-        this.form.patchValue(results[1]);
+          this.userProfiles = results[1];
 
-        this.userProfiles = results[2];
-
-        this.setAvailableProfiles();
-      });
+          this.setAvailableProfiles();
+        },
+        (error) => {
+          console.log(error);
+          this.handleGetUserError(id);
+        },
+      );
   }
 
   public onSubmit(): void {
@@ -110,8 +115,6 @@ export class UserDetailsComponent implements OnInit {
   }
 
   public removeUserProfile(profile: Profile) {
-    console.log('profile');
-    console.log(profile);
     this.userProfiles.splice(this.userProfiles.indexOf(profile), 1);
     this.availableProfiles.push(profile);
   }
@@ -143,7 +146,7 @@ export class UserDetailsComponent implements OnInit {
           type: 'danger',
           message: `Não foi possível carregar os dados do usuário. Um novo usuário será criado.`,
         },
-        10000,
+        this.timeoutMessage,
       );
     }
   }
@@ -153,14 +156,43 @@ export class UserDetailsComponent implements OnInit {
   }
 
   private create() {
-    console.log(this.form.value);
-    console.log(this.userProfiles);
     this.isLoading = true;
     this.disableButton = true;
-    setTimeout(() => {
-      this.isLoading = false;
-      this.disableButton = false;
-    }, 4000);
+
+    const values = this.form.value;
+
+    this.userService.create(values).subscribe(
+      (user) => {
+        this.userService
+          .setProfilesByUserId(user.id, this.userProfiles)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+              this.disableButton = false;
+            }),
+          )
+          .subscribe(() => {
+            this.alertComponent?.setAlertMessage(
+              {
+                type: 'success',
+                message: `Usuário ${values.username} criado com sucesso.`,
+              },
+              this.timeoutMessage,
+            );
+          });
+      },
+      () => {
+        this.isLoading = false;
+        this.disableButton = false;
+        this.alertComponent?.setAlertMessage(
+          {
+            type: 'danger',
+            message: `Não foi possível criar o usuário ${this.form.value.username}.`,
+          },
+          this.timeoutMessage,
+        );
+      },
+    );
   }
 
   private update() {
@@ -169,17 +201,58 @@ export class UserDetailsComponent implements OnInit {
     modalRef.componentInstance.subtitle = `Confirma a alteração no usuário selecionado?`;
 
     modalRef.result.then((result) => {
-      if (result) {
-        console.log(result);
-        console.log(this.user, this.form.value);
-        console.log(this.userProfiles);
-        this.isLoading = true;
-        this.disableButton = true;
-        setTimeout(() => {
+      if (!result) {
+        return;
+      }
+
+      this.isLoading = true;
+      this.disableButton = true;
+
+      const values = this.form.value;
+
+      this.userService.update(values.id as number, values).subscribe(
+        () => {
+          this.userService
+            .setProfilesByUserId(values.id, this.userProfiles)
+            .pipe(
+              finalize(() => {
+                this.isLoading = false;
+                this.disableButton = false;
+              }),
+            )
+            .subscribe(
+              () => {
+                this.alertComponent?.setAlertMessage(
+                  {
+                    type: 'success',
+                    message: `Usuário ${values.username} alterado com sucesso.`,
+                  },
+                  this.timeoutMessage,
+                );
+              },
+              () => {
+                this.alertComponent?.setAlertMessage(
+                  {
+                    type: 'danger',
+                    message: `Usuário alterado, mas não foi possível associar os perfis.`,
+                  },
+                  this.timeoutMessage,
+                );
+              },
+            );
+        },
+        () => {
           this.isLoading = false;
           this.disableButton = false;
-        }, 4000);
-      }
+          this.alertComponent?.setAlertMessage(
+            {
+              type: 'danger',
+              message: `Não foi possível alterar o usuário ${this.form.value.username}.`,
+            },
+            this.timeoutMessage,
+          );
+        },
+      );
     });
   }
 }

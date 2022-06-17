@@ -32,6 +32,12 @@
   }
 }
 
+app-alert {
+  position: fixed;
+  width: 86vw;
+  z-index: 10;
+}
+
 .spinner-box {
   display: flex;
   justify-content: center;

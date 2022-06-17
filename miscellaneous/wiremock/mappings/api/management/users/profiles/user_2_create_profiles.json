@@ -1,0 +1,13 @@
+{
+  "request": {
+    "urlPath": "/user/2/profiles",
+    "method": "POST"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "fixedDelayMilliseconds": 1000
+  }
+}
