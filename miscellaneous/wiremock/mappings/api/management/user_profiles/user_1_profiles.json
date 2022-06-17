@@ -18,6 +18,6 @@
         "description": "Perfil 2"
       }
     ],
-    "fixedDelayMilliseconds": 2000
+    "fixedDelayMilliseconds": 200
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { forkJoin, Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { ConfirmModalComponent } from 'src/app/components/confirm-modal/confirm-modal.component';
@@ -63,16 +64,33 @@ export class UserDetailsComponent implements OnInit {
       },
     } = this.activatedRoute;
 
+    this.isLoading = true;
+
     if (!id) {
       this.title = 'Novo usuário';
+      this.getProfiles()
+        .pipe(finalize(() => (this.isLoading = false)))
+        .subscribe((profiles) => {
+          this.profiles = profiles;
+          this.setAvailableProfiles();
+        });
       return;
     }
 
     this.title = 'Editar Usuário';
-    this.isLoading = true;
 
-    await this.getProfiles();
-    this.getUserById(id);
+    forkJoin([this.getProfiles(), this.getUserById(id), this.getUserProfilesById(id)])
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((results) => {
+        this.profiles = results[0];
+
+        this.user = results[1];
+        this.form.patchValue(results[1]);
+
+        this.userProfiles = results[2];
+
+        this.setAvailableProfiles();
+      });
   }
 
   public onSubmit(): void {
@@ -104,28 +122,12 @@ export class UserDetailsComponent implements OnInit {
     this.userProfiles.push(profile);
   }
 
-  private getUserById(id: any) {
-    this.userService
-      .getById(id)
-      .pipe(take(1))
-      .subscribe(
-        (user) => {
-          this.user = user;
-          this.form.patchValue(user);
-          this.userService
-            .getProfilesByUserId(id)
-            .pipe(
-              take(1),
-              finalize(() => (this.isLoading = false)),
-            )
-            .subscribe((profiles) => {
-              this.userProfiles = profiles;
+  private getUserById(id: any): Observable<any> {
+    return this.userService.getById(id).pipe(take(1));
+  }
 
-              this.setAvailableProfiles();
-            });
-        },
-        () => this.handleGetUserError(id),
-      );
+  private getUserProfilesById(id: any): Observable<any> {
+    return this.userService.getProfilesByUserId(id).pipe(take(1));
   }
 
   private setAvailableProfiles() {
@@ -146,12 +148,13 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
-  private async getProfiles() {
-    this.profiles = await this.profileService.getAll().pipe(take(1)).toPromise();
+  private getProfiles(): Observable<any> {
+    return this.profileService.getAll().pipe(take(1));
   }
 
   private create() {
     console.log(this.form.value);
+    console.log(this.userProfiles);
     this.isLoading = true;
     this.disableButton = true;
     setTimeout(() => {
@@ -168,8 +171,8 @@ export class UserDetailsComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result) {
         console.log(result);
-        console.log(this.user);
-        console.log(this.form.value);
+        console.log(this.user, this.form.value);
+        console.log(this.userProfiles);
         this.isLoading = true;
         this.disableButton = true;
         setTimeout(() => {
