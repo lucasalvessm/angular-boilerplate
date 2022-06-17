@@ -1,0 +1,27 @@
+<div class="add-button">
+  <button (click)="createNewProfile()" class="btn btn-dark" type="submit">Novo Usuário</button>
+</div>
+
+<app-alert></app-alert>
+
+<div class="profile-list">
+  <div *ngIf="!!profiles?.length && !errorMessage" class="profile-list__table">
+    <app-profile-table
+      [profiles]="profiles"
+      (profileDeleted)="onProfileDeleted($event)"
+      (profileEdited)="editProfile($event)">
+    </app-profile-table>
+  </div>
+
+  <div
+    *ngIf="!profiles?.length && !errorMessage"
+    class="profile-list__spinner text-center spinner-border"
+    role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div *ngIf="!profiles?.length && !!errorMessage" class="profile-list__error">
+    <ngb-alert class="login-container__alert" type="danger">{{ errorMessage }}</ngb-alert>
+    <button (click)="tryAgain()" class="btn btn-dark" type="submit">Tentar novamente</button>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="details-actions">
+  <button (click)="goBack()" class="btn btn-dark" type="submit">Voltar</button>
+  <h2>{{ title }}</h2>
+</div>
+
+<app-alert></app-alert>
+
+<div *ngIf="isLoading" class="spinner-box">
+  <div class="profile-list__spinner text-center spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<form [formGroup]="form" (submit)="onSubmit()" class="profile-details__form">
+  <div *ngIf="profile?.id" class="profile-details__input">
+    <label class="form-label">Id do usuário</label>
+    <p>#{{ profile?.id }}</p>
+  </div>
+  <div class="profile-details__input">
+    <label for="description" class="form-label">Descrição</label>
+    <input type="text" formControlName="description" class="form-control" id="description" placeholder="Carlos" />
+    <div *ngIf="isFormFieldInvalid(form, 'description')" class="invalid-feedback">
+      {{ applicationMessages.requiredField }}
+    </div>
+  </div>
+
+  <div class="profile-details__button">
+    <button [disabled]="isFormDisabled" class="btn btn-dark" type="submit">Salvar</button>
+  </div>
+</form>

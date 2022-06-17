@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Excluir</th>
+      <th scope="col">Editar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let profile of profiles">
+      <td>{{ profile.id }}</td>
+      <td>{{ profile.description }}</td>
+      <td>
+        <button (click)="onDelete(profile)" type="button" class="btn btn-outline-danger">
+          <i class="bi bi-trash2"></i>
+        </button>
+      </td>
+
+      <td>
+        <button (click)="onEdit(profile)" type="button" class="btn btn-outline-dark"><i class="bi bi-pen"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>

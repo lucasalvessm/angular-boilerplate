@@ -1,0 +1,13 @@
+{
+  "request": {
+    "urlPattern": "/profiles/[0-9]*",
+    "method": "PUT"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "fixedDelayMilliseconds": 1000
+  }
+}

@@ -78,7 +78,7 @@ export class UserDetailsComponent implements OnInit {
       return;
     }
 
-    this.title = 'Editar Usuário';
+    this.title = 'Editar usuário';
 
     forkJoin([this.getUserById(id), this.getUserProfilesById(id)])
       .pipe(finalize(() => (this.isLoading = false)))
