@@ -6,13 +6,15 @@
     "start": "ng serve",
     "start:wiremock": "ng serve -c wiremock",
     "start:with-mock": "start-server-and-test wiremock http://localhost:8080 start:wiremock",
-    "build": "ng build",
+    "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "prettier": "prettier --write \"src/**/*.{ts, html, scss}\"",
     "prepare": "husky install",
-    "wiremock": "docker-compose -f ./miscellaneous/wiremock/docker-compose.wiremock.yml up"
+    "wiremock": "docker-compose -f ./miscellaneous/wiremock/docker-compose.wiremock.yml up",
+    "docker:build": "docker build -t barreto-front .",
+    "docker:run": "docker run --name barreto-front-container -d -p 8888:80 barreto-front"
   },
   "private": true,
   "dependencies": {
