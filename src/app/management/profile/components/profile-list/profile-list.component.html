@@ -17,7 +17,7 @@
     *ngIf="!profiles?.length && !errorMessage"
     class="profile-list__spinner text-center spinner-border"
     role="status">
-    <span class="sr-only">Loading...</span>
+    <span class="visually-hidden">Loading...</span>
   </div>
 
   <div *ngIf="!profiles?.length && !!errorMessage" class="profile-list__error">

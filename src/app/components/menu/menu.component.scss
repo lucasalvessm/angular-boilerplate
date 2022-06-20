@@ -7,3 +7,12 @@
 .navbar-dark .navbar-nav .nav-link {
   color: white !important;
 }
+
+.navbar-brand {
+  img {
+    max-height: 45px;
+    background: white;
+    border-radius: 10px;
+    max-width: 150px;
+  }
+}
