@@ -2,8 +2,8 @@
 
 Versões utilizadas:
 
-- Angular 12.2.17
-- Node 14.19.0
+- Angular 13.3.11
+- Node >= 14.19.0
 - NPM 8.7.0
 
 ## Setup do projeto
